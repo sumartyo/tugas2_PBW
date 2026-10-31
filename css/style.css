@@ -1,0 +1,435 @@
+/* ============================================================
+   SITTA Bahan Ajar UT — style.css (Diperbaiki)
+   ============================================================ */
+
+/* ---------- Reset & Base ---------- */
+/* PERBAIKAN: Mengubah '-' menjadi '*' agar reset berlaku untuk semua elemen */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f6f9;
+    color: #2c3e50;
+    line-height: 1.6;
+    padding: 0 0 40px;
+}
+
+h1,
+h2,
+h3 {
+    color: #1a3c6e;
+    margin-bottom: 12px;
+}
+
+h1 {
+    font-size: 26px;
+    border-bottom: 3px solid #2e86de;
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 20px;
+    margin-top: 30px;
+}
+
+/* ---------- Navigasi (index.html) ---------- */
+nav {
+    background: linear-gradient(90deg, #1a3c6e, #2e86de);
+    color: #fff;
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    flex-wrap: wrap;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+nav h1 {
+    color: #fff;
+    border: none;
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+nav a:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+main {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 24px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+/* ---------- Container utama halaman ---------- */
+#app {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 24px 28px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* ---------- Section Filter ---------- */
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 24px;
+    align-items: flex-end;
+    background: #eef4fb;
+    border: 1px solid #d0e1f5;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+}
+
+.filters label {
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    font-weight: 600;
+    color: #34495e;
+    gap: 6px;
+}
+
+.filters label input[type="checkbox"] {
+    margin-top: 2px;
+    width: 18px;
+    height: 18px;
+    accent-color: #2e86de;
+    cursor: pointer;
+}
+
+.filters label:has(input[type="checkbox"]) {
+    flex-direction: row;
+    align-items: center;
+    padding-bottom: 8px; /* Menyelaraskan checkbox dengan input lainnya */
+}
+
+/* ---------- Elemen Form (select, input, textarea) ---------- */
+select,
+input[type="text"],
+input[type="number"],
+input[type="date"],
+textarea {
+    font-family: inherit;
+    font-size: 14px;
+    padding: 8px 10px;
+    border: 1px solid #bfc9d4;
+    border-radius: 6px;
+    background: #fff;
+    color: #2c3e50;
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s;
+    min-width: 140px;
+}
+
+select:focus,
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: #2e86de;
+    box-shadow: 0 0 0 3px rgba(46, 134, 222, 0.15);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 60px;
+    width: 100%;
+}
+
+/* ---------- Tombol General ---------- */
+button {
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 9px 16px;
+    border: none;
+    border-radius: 6px;
+    background: #2e86de;
+    color: #fff;
+    cursor: pointer;
+    transition:
+        background 0.2s,
+        transform 0.1s;
+}
+
+button:hover {
+    background: #1a6fc4;
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+button[type="submit"] {
+    background: #27ae60;
+}
+
+button[type="submit"]:hover {
+    background: #1e8449;
+}
+
+.filters button {
+    background: #e67e22;
+}
+
+.filters button:hover {
+    background: #ca6f1e;
+}
+
+/* ---------- Tombol Kembali ---------- */
+.btn-kembali {
+    display: inline-block;
+    margin-bottom: 18px;
+    padding: 8px 16px;
+    background: #ecf0f1;
+    color: #1a3c6e;
+    border: 1px solid #bdc3c7;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition:
+        background 0.2s,
+        transform 0.15s;
+}
+
+.btn-kembali:hover {
+    background: #d6e4f0;
+    transform: translateX(-3px);
+}
+
+/* ---------- Tabel ---------- */
+/* PERBAIKAN: Menambahkan div wrapper responsif (di-handle via CSS block jika HTML tidak diubah) */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    font-size: 14px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+table th {
+    background: #1a3c6e;
+    color: #fff;
+    text-align: left;
+    padding: 12px 10px;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+table td {
+    padding: 10px;
+    border-bottom: 1px solid #e6ecf3;
+    vertical-align: middle;
+}
+
+table tbody tr:nth-child(even) {
+    background: #f9fbfd;
+}
+
+table tbody tr:hover {
+    background: #eaf3fd;
+    transition: background 0.15s;
+}
+
+table td input[type="number"] {
+    width: 70px;
+    min-width: 70px;
+}
+
+/* Tabel mode edit */
+table td input,
+table td select {
+    min-width: 80px;
+    font-size: 13px;
+    padding: 5px 7px;
+}
+
+/* ---------- Kolom Aksi di Tabel ---------- */
+td.aksi {
+    white-space: nowrap;
+    text-align: center;
+}
+
+td.aksi button {
+    padding: 6px 10px;
+    font-size: 13px;
+    margin: 0 3px;
+    border-radius: 6px;
+    line-height: 1;
+}
+
+.btn-edit {
+    background: #3498db;
+}
+.btn-edit:hover {
+    background: #2471a3;
+}
+
+.btn-hapus {
+    background: #e74c3c;
+}
+.btn-hapus:hover {
+    background: #b03a2e;
+}
+
+.btn-simpan {
+    background: #27ae60;
+}
+.btn-simpan:hover {
+    background: #1e8449;
+}
+
+.btn-batal {
+    background: #95a5a6;
+}
+.btn-batal:hover {
+    background: #7f8c8d;
+}
+
+/* ---------- Badge Status Stok ---------- */
+.status {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12.5px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.status.aman {
+    background: #d4f5e2;
+    color: #1e8449;
+    border: 1px solid #7dd3a0;
+}
+
+.status.menipis {
+    background: #fdebd0;
+    color: #b9770e;
+    border: 1px solid #f5c46c;
+}
+
+.status.kosong {
+    background: #fadbd8;
+    color: #c0392b;
+    border: 1px solid #f1948a;
+    animation: pulse 1.6s infinite;
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.6;
+    }
+}
+
+/* ---------- Form Tambah (stok.html) ---------- */
+form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 16px;
+    align-items: flex-start;
+    background: #f8fafc;
+    border: 1px dashed #b8c9db;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+form input,
+form select {
+    flex: 1 1 180px;
+}
+
+form textarea {
+    flex: 1 1 100%;
+}
+
+form button[type="submit"] {
+    flex: 0 0 auto;
+    align-self: flex-end;
+}
+
+form p {
+    flex: 1 1 100%;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* ---------- Responsif (layar kecil) ---------- */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    #app {
+        margin: 12px;
+        padding: 16px;
+    }
+
+    .filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filters label:has(input[type="checkbox"]) {
+        padding-bottom: 0;
+    }
+
+    /* PERBAIKAN: Membuat tabel bisa di-scroll secara horizontal di layar HP agar tidak rusak */
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    table {
+        font-size: 12.5px;
+    }
+    table th,
+    table td {
+        padding: 8px 6px;
+    }
+
+    form {
+        flex-direction: column;
+    }
+
+    form input,
+    form select,
+    form button {
+        width: 100%;
+    }
+}

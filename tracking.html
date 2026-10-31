@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Tracking DO - SITTA UT</title>
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body>
+        <div id="app">
+            <!-- Navigasi -->
+            <a href="index.html" class="btn-kembali">← Kembali ke Beranda</a>
+            <h1>Tracking Delivery Order (DO)</h1>
+
+            <!-- ===== FORMULIR TAMBAH DO ===== -->
+            <h2>Tambah Data Delivery Order Baru</h2>
+            <form @submit.prevent="tambahDO">
+                <!-- DO Otomatis (Directive One-way binding v-bind) -->
+                <label style="flex: 1 1 100%"
+                    >Nomor DO (Terbuat Otomatis):
+                    <input
+                        type="text"
+                        :value="generatedDO"
+                        disabled
+                        style="
+                            background: #eef4fb;
+                            font-weight: bold;
+                            color: #1a3c6e;
+                        "
+                    />
+                </label>
+
+                <input
+                    v-model="formDO.nim"
+                    type="text"
+                    placeholder="NIM Mahasiswa"
+                    required
+                />
+                <input
+                    v-model="formDO.nama"
+                    type="text"
+                    placeholder="Nama Lengkap"
+                    required
+                />
+
+                <!-- Pilihan Ekspedisi -->
+                <select v-model="formDO.ekspedisi" required>
+                    <option value="" disabled>-- Pilih Ekspedisi --</option>
+                    <option
+                        v-for="eks in pengirimanList"
+                        :key="eks.kode"
+                        :value="eks.nama"
+                    >
+                        {{ eks.kode }} - {{ eks.nama }}
+                    </option>
+                </select>
+
+                <!-- Pilihan Paket Bahan Ajar -->
+                <select v-model="formDO.paket" required>
+                    <option value="" disabled>
+                        -- Pilih Paket Bahan Ajar --
+                    </option>
+                    <option
+                        v-for="pkt in paketList"
+                        :key="pkt.kode"
+                        :value="pkt.kode"
+                    >
+                        {{ pkt.kode }} - {{ pkt.nama }}
+                    </option>
+                </select>
+
+                <!-- Menampilkan Detail Paket apabila paket sudah dipilih (Directive v-if) -->
+                <div v-if="selectedPaketDetail" class="detail-paket">
+                    <strong>Detail Isi {{ selectedPaketDetail.nama }}:</strong>
+                    <ul>
+                        <li v-for="isi in selectedPaketDetail.isi" :key="isi">
+                            {{ isi }}
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Tanggal Kirim dan Harga -->
+                <input
+                    v-model="formDO.tanggalKirim"
+                    type="date"
+                    required
+                    title="Tanggal Kirim"
+                />
+                <label style="display: flex; align-items: center; gap: 8px"
+                    >Total Tagihan:
+                    <input
+                        type="number"
+                        v-model="formDO.totalHarga"
+                        readonly
+                        style="background: #eef4fb; font-weight: bold"
+                    />
+                </label>
+
+                <!-- Notifikasi (Directive v-show / v-if) -->
+                <button type="submit">Buat DO</button>
+                <p v-if="pesanError" style="color: #c0392b; font-weight: bold">
+                    {{ pesanError }}
+                </p>
+                <p v-if="pesanSukses" style="color: #27ae60; font-weight: bold">
+                    {{ pesanSukses }}
+                </p>
+            </form>
+
+            <!-- ===== DAFTAR TRACKING DO ===== -->
+            <h2 style="margin-top: 40px">Daftar Pelacakan Delivery Order</h2>
+            <div style="display: flex; flex-direction: column; gap: 15px">
+                <!-- Looping data object menggunakan v-for -->
+                <div
+                    v-for="(dataDO, nomorDO) in trackingData"
+                    :key="nomorDO"
+                    class="kartu-do"
+                >
+                    <h3>DO: <strong>{{ nomorDO }}</strong></h3>
+                    <p>
+                        <strong>Penerima:</strong> {{ dataDO.nama }} (NIM: {{
+                        dataDO.nim }})
+                    </p>
+                    <p>
+                        <strong>Paket:</strong> {{ dataDO.paket }} |
+                        <strong>Tagihan:</strong> Rp {{
+                        dataDO.total.toLocaleString('id-ID') }}
+                    </p>
+                    <p>
+                        <strong>Kurir:</strong> {{ dataDO.ekspedisi }} |
+                        <strong>Tanggal Kirim:</strong> {{ dataDO.tanggalKirim
+                        }}
+                    </p>
+                    <p>
+                        <strong>Status Pengiriman:</strong>
+                        <span class="status aman">{{ dataDO.status }}</span>
+                    </p>
+
+                    <details>
+                        <summary>
+                            Klik untuk melihat Riwayat Perjalanan (Tracking)
+                        </summary>
+                        <ul>
+                            <li
+                                v-for="(track, index) in dataDO.perjalanan"
+                                :key="index"
+                            >
+                                <em>{{ track.waktu }}</em> - {{ track.keterangan
+                                }}
+                            </li>
+                            <li
+                                v-if="!dataDO.perjalanan || dataDO.perjalanan.length === 0"
+                            >
+                                Data riwayat perjalanan belum tersedia.
+                            </li>
+                        </ul>
+                    </details>
+                </div>
+            </div>
+        </div>
+
+        <!-- Script Vue -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+        <script src="js/tracking-app.js"></script>
+    </body>
+</html>
